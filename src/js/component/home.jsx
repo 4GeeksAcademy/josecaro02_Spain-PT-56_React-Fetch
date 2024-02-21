@@ -34,18 +34,6 @@ const Home = () => {
 	const urlTodos = "https://playground.4geeks.com/apis/fake/todos/user/josecaro02"
 	//POST
 	//peticion
-	useEffect(() => {
-		fetch(urlTodos, {
-			method: "POST",
-			body: JSON.stringify([]),
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-			.then((response) => { return response.json() })
-			.then((data) => { console.log(data) })
-			.catch((err) => { return err })
-	}, [])
 
 
 	function addNewTask() {
@@ -53,7 +41,6 @@ const Home = () => {
 			label: "estudiar los hooks",
 			done: false
 		}
-		setTodos([...todos, newTodo])
 		fetch(urlTodos, {
 			method: "PUT",
 			body: JSON.stringify([...todos, newTodo]),
@@ -62,7 +49,7 @@ const Home = () => {
 			}
 		})
 			.then((response) => { return response.json() })
-			.then((data) => { console.log(data) })
+			.then((data) => { setTodos([...todos, newTodo]) })
 			.catch((err) => { err })
 
 	}
